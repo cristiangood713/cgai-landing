@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cgai — CRE Sponsors & Asset Managers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --bg-elevated: #0a0a0a;
+            --bg-card: #0f0f0f;
+            --bg-card-hover: #131313;
+            --text: #f5f5f0;
+            --text-muted: #8a8a82;
+            --text-dim: #5a5a55;
+            --accent: #c9a84c;
+            --accent-muted: #8b7355;
+            --border: #1a1a1a;
+            --border-light: #2a2a2a;
+            --border-accent: rgba(201, 168, 76, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .serif { font-family: 'Instrument Serif', Georgia, serif; }
+        .italic { font-style: italic; }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.25rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .back-link {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 10rem 3rem 6rem;
+            position: relative;
+            overflow: hidden;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-visual {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 550px;
+            height: 550px;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--accent), transparent 60%);
+            filter: blur(90px);
+            animation: pulse 12s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero-meta {
+            position: relative;
+            z-index: 1;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(2.75rem, 7vw, 6rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            max-width: 850px;
+        }
+
+        .hero h1 .accent { color: var(--accent); font-style: italic; }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.8;
+            margin-bottom: 4rem;
+        }
+
+        .hero-cta-group {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .cta-link.primary {
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 4px;
+        }
+        .cta-link.primary:hover { color: var(--text); border-color: var(--text); }
+
+        .cta-link.secondary {
+            color: var(--text-muted);
+            border-bottom: 1px solid transparent;
+            padding-bottom: 4px;
+        }
+        .cta-link.secondary:hover { color: var(--text); border-color: var(--text-dim); }
+
+        .arrow { transition: transform 0.3s; }
+        .cta-link:hover .arrow { transform: translateX(6px); }
+
+        /* --- MARQUEE --- */
+        .marquee-wrap {
+            width: 100%;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
+        }
+
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 40s linear infinite;
+        }
+
+        .marquee span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            padding: 0 2rem;
+        }
+        .marquee .star { color: var(--accent-muted); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- PAIN SECTION --- */
+        .pain {
+            padding: 8rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .pain-left .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+            margin-bottom: 2rem;
+        }
+
+        .pain-left h2 {
+            font-size: clamp(1.75rem, 3.5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .pain-left p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .pain-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .pain-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.75rem 2rem;
+            transition: all 0.3s;
+        }
+
+        .pain-item:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+
+        .pain-item h4 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .pain-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- PROOF --- */
+        .proof {
+            padding: 6rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.2;
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-card:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .work-card:hover::before { opacity: 0.5; }
+
+        .work-meta {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+
+        .work-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .work-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .work-metric {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* --- SERVICES --- */
+        .services {
+            padding: 6rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-header h2 {
+            font-size: clamp(1.75rem, 3vw, 3rem);
+            line-height: 1.15;
+            font-weight: 400;
+        }
+
+        .services-header h2 .accent { color: var(--accent); font-style: italic; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-3px);
+        }
+
+        .service-num {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-muted);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .service-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-meta {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.7rem;
+        }
+
+        /* --- DIFFERENTIATION --- */
+        .diff {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .diff-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .diff-header h2 {
+            font-size: clamp(1.75rem, 3vw, 3rem);
+            line-height: 1.15;
+            font-weight: 400;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .diff-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .diff-card:hover {
+            border-color: var(--border-light);
+        }
+
+        .diff-card h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .diff-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- CTA --- */
+        .cta-final {
+            padding: 8rem 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cta-final h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .cta-final h2 .accent { color: var(--accent); font-style: italic; }
+
+        .cta-sub {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+        .btn-primary:hover { background: transparent; color: var(--accent); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--border-light);
+        }
+        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+        .cta-paths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .path-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+        }
+
+        .path-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .path-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 3rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+        footer a:hover { color: var(--accent); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 4rem; }
+            .hero-visual { width: 250px; height: 250px; opacity: 0.08; }
+            .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .hero-cta-group { flex-direction: column; align-items: flex-start; }
+            .pain-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .work-grid, .services-grid, .diff-grid, .cta-paths { grid-template-columns: 1fr; }
+            section, .pain, .proof, .services, .diff { padding: 4rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="back-link">← cgai</a>
+    <div class="nav-links">
+        <a href="#pain">The Problem</a>
+        <a href="#proof">Proof</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-visual"><div class="orb"></div></div>
+    <div class="hero-meta">Asset Management · Portfolio Intelligence · Los Angeles</div>
+    <h1 class="serif">
+        Built for sponsors<br>
+        who need their <span class="accent italic">portfolio</span><br>
+        to think.
+    </h1>
+    <p class="hero-sub">
+        Asset managers, developers, and sponsors drowning in lease abstracts, comp spreadsheets, and investor emails. We build the intelligence layer that turns your data into decisions — and your analysts into strategists.
+    </p>
+    <div class="hero-cta-group">
+        <a href="#contact" class="cta-link primary">
+            Book a Workflow Audit <span class="arrow">→</span>
+        </a>
+        <a href="#proof" class="cta-link secondary">
+            See the proof <span class="arrow">→</span>
+        </a>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee">
+        <span>Lease Abstraction</span><span class="star">★</span>
+        <span>Sales Comps</span><span class="star">★</span>
+        <span>Lease Comps</span><span class="star">★</span>
+        <span>Investor Reporting</span><span class="star">★</span>
+        <span>Portfolio Dashboards</span><span class="star">★</span>
+        <span>Underwriting Automation</span><span class="star">★</span>
+        <span>Critical Date Tracking</span><span class="star">★</span>
+        <span>Market Intelligence</span><span class="star">★</span>
+        <span>Lease Abstraction</span><span class="star">★</span>
+        <span>Sales Comps</span><span class="star">★</span>
+        <span>Lease Comps</span><span class="star">★</span>
+        <span>Investor Reporting</span><span class="star">★</span>
+        <span>Portfolio Dashboards</span><span class="star">★</span>
+        <span>Underwriting Automation</span><span class="star">★</span>
+        <span>Critical Date Tracking</span><span class="star">★</span>
+        <span>Market Intelligence</span><span class="star">★</span>
+    </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain" id="pain">
+    <div class="pain-grid">
+        <div class="pain-left">
+            <div class="section-label">The Problem</div>
+            <h2 class="serif">
+                Every sponsor we talk to has the same spreadsheet problem.
+            </h2>
+            <p>
+                Your portfolio lives in Yardi, Argus, Excel, email, and Dropbox. Your analyst spends 15 hours a week manually abstracting leases. Your investor reports take 2 days to compile. And nobody can answer "what's happening across the portfolio" without opening 7 files.
+            </p>
+        </div>
+        <div class="pain-right">
+            <div class="pain-item">
+                <h4>The lease abstraction tax</h4>
+                <p>Every acquisition, refi, or disposition requires 3–4 hours of manual lease review per property. A 20-asset sponsor burns 200+ analyst hours annually on work that a system should handle.</p>
+            </div>
+            <div class="pain-item">
+                <h4>The comp research treadmill</h4>
+                <p>Your team pulls sales and lease comps from 4 different sources, normalizes them in Excel, and rebuilds the analysis every quarter. The data exists. The system doesn't.</p>
+            </div>
+            <div class="pain-item">
+                <h4>The investor reporting scramble</h4>
+                <p>Quarterly distributions require 2 days of analyst time: pulling performance data, writing narrative, building charts, checking for errors. Every quarter. Every property.</p>
+            </div>
+            <div class="pain-item">
+                <h4>The portfolio blind spot</h4>
+                <p>No single view of critical dates, lease expirations, tenant health, or market position. Decisions are reactive because visibility is fragmented.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof" id="proof">
+    <div class="section-header">
+        <div>
+            <div class="section-label">Proof</div>
+            <h2 class="serif">The sponsors winning right now are using AI to <span class="accent italic">close faster</span>, report <span class="accent italic">clearer</span>, and operate <span class="accent italic">leaner</span>.</h2>
+        </div>
+    </div>
+    <div class="work-grid">
+        <div class="work-card">
+            <div class="work-meta">7-Property Sponsor · Lease Abstraction OS</div>
+            <h3>Sponsor Reporting System</h3>
+            <p>Built NLP-powered lease abstraction workflow, automated investor reporting, and a comp research agent for a multi-family sponsor. Replaced 200+ hours of annual manual work with an AI-assisted operating system.</p>
+            <div class="work-metric">15 hrs/wk → 2 hrs/wk of analyst time</div>
+        </div>
+        <div class="work-card">
+            <div class="work-meta">45-Asset Portfolio · Quarterly Intelligence</div>
+            <h3>Portfolio Market Report</h3>
+            <p>Automated sales and lease comp monitoring across a 45-property portfolio. Alerts on market movements, tenant demand shifts, and competitive pricing — delivered as a living dashboard, not a quarterly scramble.</p>
+            <div class="work-metric">20 hrs → 90 min per quarterly report</div>
+        </div>
+        <div class="work-card">
+            <div class="work-meta">Retail Center · OM + Intelligence</div>
+            <h3>AI-Enhanced Offering Memorandum</h3>
+            <p>Complete brand and OM redesign with auto-generated market summary and comp analysis for a 45,000 SF retail center. The capital raise closed two weeks ahead of schedule.</p>
+            <div class="work-metric">2 days → 4 hours · Closed 2 weeks early</div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+    <div class="services-header">
+        <div class="section-label">Services</div>
+        <h2 class="serif">
+            Everything between the <span class="accent italic">spreadsheet</span><br>
+            and the <span class="accent italic">system</span>.
+        </h2>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-num">01</div>
+            <h3>Deal Materials</h3>
+            <p>AI-enhanced offering memorandums, leasing brochures, and broker opinions of value that close faster. Auto-generated market summaries, comp analysis, and investor-ready narrative. For the deal that needs to look institutional, now.</p>
+            <div class="tags">
+                <span class="tag">OM</span>
+                <span class="tag">BOV</span>
+                <span class="tag">Brochure</span>
+                <span class="tag">Market Summary</span>
+            </div>
+            <div class="service-meta">Starting at $3,500 · 5–10 day turnaround</div>
+        </div>
+        <div class="service-card">
+            <div class="service-num">02</div>
+            <h3>Portfolio Intelligence</h3>
+            <p>Automated comp analysis, market reports, and investor narratives delivered in days, not weeks. For the sponsor who needs institutional-grade intelligence without the institutional headcount.</p>
+            <div class="tags">
+                <span class="tag">Sales Comps</span>
+                <span class="tag">Lease Comps</span>
+                <span class="tag">Investor Decks</span>
+                <span class="tag">Quarterly Reports</span>
+            </div>
+            <div class="service-meta">$7,500 – $12,500 per engagement</div>
+        </div>
+        <div class="service-card">
+            <div class="service-num">03</div>
+            <h3>CRE Workflow OS</h3>
+            <p>A 90-day diagnostic and build of your AI operating system. Lease abstraction, reporting automation, portfolio dashboards, and the comp research agent that works while your analysts sleep. For the sponsor scaling past the spreadsheet.</p>
+            <div class="tags">
+                <span class="tag">90-Day Audit</span>
+                <span class="tag">Implementation</span>
+                <span class="tag">Retainer</span>
+                <span class="tag">Portfolio OS</span>
+            </div>
+            <div class="service-meta">$15,000 – $50,000+ · Monthly retainers available</div>
+        </div>
+    </div>
+</section>
+
+<!-- DIFFERENTIATION -->
+<section class="diff">
+    <div class="diff-header">
+        <div class="section-label">Why cgai</div>
+        <h2 class="serif">Not another PropTech vendor. Not another consultant.</h2>
+    </div>
+    <div class="diff-grid">
+        <div class="diff-card">
+            <h4>Built from the deal room</h4>
+            <p>We started by designing OMs and brochures that close. We understand what sponsors actually need because we've sat in the room where the check gets written.</p>
+        </div>
+        <div class="diff-card">
+            <h4>Implementation, not advice</h4>
+            <p>We don't hand you a strategy deck and leave. We build the system, train your team, and run it alongside you for 90 days.</p>
+        </div>
+        <div class="diff-card">
+            <h4>CRE-native language</h4>
+            <p>We know the difference between a rent roll and a recovery statement. Between a TI allowance and an abatement. Your team doesn't waste time translating.</p>
+        </div>
+        <div class="diff-card">
+            <h4>Headcount leverage, not replacement</h4>
+            <p>We build systems that make your analysts faster and smarter — not obsolete. Your team stays. The manual work leaves.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-final" id="contact">
+    <h2 class="serif">
+        Start with a <span class="accent italic">project</span>.<br>
+        Scale to a <span class="accent italic">system</span>.
+    </h2>
+    <p class="cta-sub">Two ways to begin. Pick the path that fits where you are.</p>
+    <div class="cta-paths">
+        <div class="path-card">
+            <h4>Have a deal that needs materials?</h4>
+            <p>Start with an AI-enhanced OM, BOV, or leasing brochure. Human-quality design backed by automated market intelligence. 5–10 day turnaround.</p>
+            <a href="mailto:hello@cgai.co?subject=CRE%20Project%20Inquiry" class="btn btn-primary">
+                Start a project <span class="arrow">→</span>
+            </a>
+        </div>
+        <div class="path-card">
+            <h4>Ready to modernize your portfolio?</h4>
+            <p>Book a 2-week Workflow Audit. We map your AI opportunity, build a 90-day implementation roadmap, and identify the first quick wins across your portfolio.</p>
+            <a href="mailto:hello@cgai.co?subject=CRE%20Diagnostic%20Booking" class="btn btn-secondary">
+                Book a diagnostic <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>cgai · Los Angeles, CA · <a href="mailto:hello@cgai.co">hello@cgai.co</a></p>
+    <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+        Modernization and intelligence for operators of physical assets.<br>
+        Not a software vendor. Not a design shop. An advisory practice that ships working systems.
+    </p>
+</footer>
+
+</body>
+</html>

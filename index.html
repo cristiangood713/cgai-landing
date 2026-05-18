@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cgai — Deal Materials, Brand Systems & Intelligence for CRE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --bg-elevated: #0a0a0a;
+            --bg-card: #0f0f0f;
+            --bg-card-hover: #131313;
+            --text: #f5f5f0;
+            --text-muted: #8a8a82;
+            --text-dim: #5a5a55;
+            --accent: #c9a84c;
+            --accent-muted: #8b7355;
+            --border: #1a1a1a;
+            --border-light: #2a2a2a;
+            --border-accent: rgba(201, 168, 76, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .serif { font-family: 'Instrument Serif', Georgia, serif; }
+        .italic { font-style: italic; }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.25rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 10rem 3rem 6rem;
+            position: relative;
+            overflow: hidden;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-visual {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--accent), transparent 60%);
+            filter: blur(90px);
+            animation: pulse 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.15); opacity: 0.85; }
+        }
+
+        .hero-meta {
+            position: relative;
+            z-index: 1;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(2.75rem, 7vw, 6rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            max-width: 900px;
+        }
+
+        .hero h1 .accent { color: var(--accent); font-style: italic; }
+
+        .hero-sub {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 580px;
+            line-height: 1.8;
+            margin-bottom: 4rem;
+        }
+
+        .hero-cta-group {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .cta-link.primary {
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 4px;
+        }
+        .cta-link.primary:hover { color: var(--text); border-color: var(--text); }
+
+        .cta-link.secondary {
+            color: var(--text-muted);
+            border-bottom: 1px solid transparent;
+            padding-bottom: 4px;
+        }
+        .cta-link.secondary:hover { color: var(--text); border-color: var(--text-dim); }
+
+        .arrow { transition: transform 0.3s; }
+        .cta-link:hover .arrow { transform: translateX(6px); }
+
+        /* --- MARQUEE --- */
+        .marquee-wrap {
+            width: 100%;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
+        }
+
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 35s linear infinite;
+        }
+
+        .marquee span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            padding: 0 2rem;
+        }
+        .marquee .star { color: var(--accent-muted); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- TWO-PATH INTRO --- */
+        .two-path {
+            padding: 8rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .two-path-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .two-path-header .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .two-path-header h2 {
+            font-size: clamp(1.75rem, 3.5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .path-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3.5rem 3rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-block:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+
+        .path-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .path-block:hover::before { opacity: 0.4; }
+
+        .path-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .path-block h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+
+        .path-block p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .path-services {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .path-service {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .path-service .bullet {
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+
+        .path-cta {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 3px;
+            transition: all 0.3s;
+        }
+
+        .path-cta:hover {
+            color: var(--text);
+            border-color: var(--text);
+        }
+
+        /* --- SELECTED WORK --- */
+        .work {
+            padding: 6rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .work-header .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+        }
+
+        .work-header h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.2;
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-card:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .work-card:hover::before { opacity: 0.5; }
+
+        .work-meta {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+
+        .work-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .work-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .work-metric {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* --- PROCESS --- */
+        .process {
+            padding: 6rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .process-header .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .process-header h2 {
+            font-size: clamp(1.75rem, 3vw, 3rem);
+            line-height: 1.15;
+            font-weight: 400;
+        }
+
+        .process-header h2 .accent { color: var(--accent); font-style: italic; }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 0;
+        }
+
+        .step {
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .step:not(:last-child) {
+            border-right: none;
+        }
+
+        .step-num {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-muted);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .step h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* --- BRIDGE --- */
+        .bridge {
+            padding: 8rem 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .bridge-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+            margin-bottom: 2rem;
+        }
+
+        .bridge h2 {
+            font-size: clamp(1.75rem, 3.5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .bridge h2 .accent { color: var(--accent); font-style: italic; }
+
+        .bridge p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- INTELLIGENCE TEASER --- */
+        .intel {
+            padding: 6rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .intel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .intel-header .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-muted);
+        }
+
+        .intel-header h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.2;
+            font-weight: 400;
+            max-width: 700px;
+        }
+
+        .intel-header h2 .accent { color: var(--accent); font-style: italic; }
+
+        .intel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .intel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .intel-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-3px);
+        }
+
+        .intel-card h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        .intel-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .intel-metric {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* --- CTA --- */
+        .cta-final {
+            padding: 8rem 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cta-final h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .cta-final h2 .accent { color: var(--accent); font-style: italic; }
+
+        .cta-sub {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .cta-paths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .path-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+        }
+
+        .path-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .path-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.7rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 3rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+
+        footer a:hover { color: var(--accent); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 4rem; }
+            .hero-visual { width: 250px; height: 250px; opacity: 0.08; }
+            .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .hero-cta-group { flex-direction: column; align-items: flex-start; }
+
+            .two-path { padding: 5rem 1.5rem; }
+            .paths-grid { grid-template-columns: 1fr; }
+            .path-block { padding: 2.5rem 2rem; }
+
+            .work { padding: 4rem 1.5rem; }
+            .work-grid { grid-template-columns: 1fr; }
+
+            .process { padding: 4rem 1.5rem; }
+            .process-steps { grid-template-columns: 1fr; }
+            .step { border-right: 1px solid var(--border); border-bottom: none; }
+            .step:not(:last-child) { border-bottom: none; border-right: 1px solid var(--border); }
+
+            .intel { padding: 4rem 1.5rem; }
+            .intel-grid { grid-template-columns: 1fr; }
+
+            .cta-paths { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">cgai<span>.</span></a>
+    <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#intelligence">Intelligence</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-visual"><div class="orb"></div></div>
+    <div class="hero-meta">Los Angeles · Creative Lab · Est. 2025</div>
+    <h1 class="serif">
+        The third surface<br>
+        of the <span class="accent italic">deal</span>.
+    </h1>
+    <p class="hero-sub">
+        We design offering memorandums, leasing brochures, brand systems, and investment narratives that behave like rooms — dimensional, responsive, and alive — on screen, in the deal room, and between the two.
+    </p>
+    <div class="hero-cta-group">
+        <a href="#services" class="cta-link primary">
+            View our services <span class="arrow">→</span>
+        </a>
+        <a href="#contact" class="cta-link secondary">
+            Start a project <span class="arrow">→</span>
+        </a>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee">
+        <span>Offering Memorandums</span><span class="star">★</span>
+        <span>Leasing Brochures</span><span class="star">★</span>
+        <span>Brand Systems</span><span class="star">★</span>
+        <span>Investor Decks</span><span class="star">★</span>
+        <span>Tenant Marketing</span><span class="star">★</span>
+        <span>Property Websites</span><span class="star">★</span>
+        <span>Comp Analysis</span><span class="star">★</span>
+        <span>Portfolio Intelligence</span><span class="star">★</span>
+        <span>Offering Memorandums</span><span class="star">★</span>
+        <span>Leasing Brochures</span><span class="star">★</span>
+        <span>Brand Systems</span><span class="star">★</span>
+        <span>Investor Decks</span><span class="star">★</span>
+        <span>Tenant Marketing</span><span class="star">★</span>
+        <span>Property Websites</span><span class="star">★</span>
+        <span>Comp Analysis</span><span class="star">★</span>
+        <span>Portfolio Intelligence</span><span class="star">★</span>
+    </div>
+</div>
+
+<!-- TWO-PATH SERVICES -->
+<section class="two-path" id="services">
+    <div class="two-path-header">
+        <span class="section-label">Services</span>
+        <h2 class="serif">
+            Two practices. One standard:<br>
+            <span class="accent italic">intelligence</span> embedded in every deliverable.
+        </h2>
+    </div>
+
+    <div class="paths-grid">
+        <div class="path-block">
+            <div class="path-label">For CRE Professionals</div>
+            <h3 class="serif">Deal Materials & Property Intelligence</h3>
+            <p>Built for brokers, sponsors, developers, and asset managers who need institutional-quality materials that close — and the intelligence layer that makes the next deal faster.</p>
+            <div class="path-services">
+                <div class="path-service"><span class="bullet">→</span> Offering Memorandums (OMs)</div>
+                <div class="path-service"><span class="bullet">→</span> Leasing Brochures & Flyers</div>
+                <div class="path-service"><span class="bullet">→</span> Broker Opinion of Value (BOV)</div>
+                <div class="path-service"><span class="bullet">→</span> Property & Portfolio Websites</div>
+                <div class="path-service"><span class="bullet">→</span> AI-Enhanced Market Summaries</div>
+                <div class="path-service"><span class="bullet">→</span> Sales & Lease Comp Analysis</div>
+                <div class="path-service"><span class="bullet">→</span> Investor Reporting Packages</div>
+            </div>
+            <a href="mailto:hello@cgai.co?subject=CRE%20Project%20Inquiry" class="path-cta">Start a deal project <span class="arrow">→</span></a>
+        </div>
+
+        <div class="path-block">
+            <div class="path-label">For Brands & Occupiers</div>
+            <h3 class="serif">Brand Systems & Tenant Marketing</h3>
+            <p>Built for retailers, restaurateurs, medical groups, and occupiers who need a presence that competes — from lease negotiation to grand opening to portfolio scale.</p>
+            <div class="path-services">
+                <div class="path-service"><span class="bullet">→</span> Brand Identity & Logo Systems</div>
+                <div class="path-service"><span class="bullet">→</span> Location-Specific Landing Pages</div>
+                <div class="path-service"><span class="bullet">→</span> Tenant Improvement Storytelling</div>
+                <div class="path-service"><span class="bullet">→</span> Menu / Service Collateral</div>
+                <div class="path-service"><span class="bullet">→</span> Co-Tenancy & Trade Area Maps</div>
+                <div class="path-service"><span class="bullet">→</span> Multi-Location Brand Templates</div>
+                <div class="path-service"><span class="bullet">→</span> Lease Submission Packages</div>
+            </div>
+            <a href="mailto:hello@cgai.co?subject=Brand%20%26%20Tenant%20Project" class="path-cta">Start a brand project <span class="arrow">→</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- SELECTED WORK -->
+<section class="work" id="work">
+    <div class="work-header">
+        <div>
+            <div class="section-label">Selected Work</div>
+            <h2 class="serif">Materials that <span class="accent italic">close</span>. Brands that <span class="accent italic">compete</span>.</h2>
+        </div>
+    </div>
+    <div class="work-grid">
+        <div class="work-card">
+            <div class="work-meta">Retail Center · OM · 45,000 SF · Los Angeles</div>
+            <h3>Westside Retail Portfolio</h3>
+            <p>Complete OM redesign with AI-assisted market summary and auto-compiled lease comps for a 5-asset retail portfolio. Institutional design language with embedded intelligence.</p>
+            <div class="work-metric">2 days → 4 hours · Closed 2 weeks early</div>
+        </div>
+        <div class="work-card">
+            <div class="work-meta">Medical Aesthetics · Brand System · 12 Locations</div>
+            <h3>DermaCare Clinic Group</h3>
+            <p>Brand identity, location landing page template, and lease submission package for a multi-location dermatology group expanding across Southern California.</p>
+            <div class="work-metric">Template-based system · 80% faster per opening</div>
+        </div>
+        <div class="work-card">
+            <div class="work-meta">Industrial · BOV · 200,000 SF · Inland Empire</div>
+            <h3>Gateway Logistics Park</h3>
+            <p>Broker opinion of value with integrated market intelligence — absorption trends, tenant demand signals, and comparable sale analysis in a single narrative.</p>
+            <div class="work-metric">20 hours → 90 minutes of analyst time</div>
+        </div>
+        <div class="work-card">
+            <div class="work-meta">Fast-Casual Restaurant · Brand + Web · 3 Locations</div>
+            <h3>Mesa Verde Kitchen</h3>
+            <p>Brand system, location-specific pages, and co-tenancy trade area maps for a growing fast-casual concept. Built for lease negotiation and customer acquisition.</p>
+            <div class="work-metric">3 locations live in 10 days</div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+    <div class="process-header">
+        <span class="section-label">How We Work</span>
+        <h2 class="serif">
+            From brief to boardroom in <span class="accent italic">days</span>, not weeks.
+        </h2>
+    </div>
+    <div class="process-steps">
+        <div class="step">
+            <div class="step-num">01</div>
+            <h4>Discovery & Brief</h4>
+            <p>30-minute call to understand the deal, the audience, and the deadline. We gather assets, comps, and your existing materials.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">02</div>
+            <h4>Intelligence Layer</h4>
+            <p>AI-assisted market analysis, comp pulls, and narrative drafting. Human review for accuracy. You see the data before we design.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">03</div>
+            <h4>Design & Build</h4>
+            <p>Editorial design with your brand or ours. Print-ready, web-ready, or investor-deck format. One round of revisions included.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">04</div>
+            <h4>Delivery & Scale</h4>
+            <p>Final files delivered. Optional: template system for the next 10 locations, or a conversation about what else your operation needs.</p>
+        </div>
+    </div>
+</section>
+
+<!-- BRIDGE -->
+<section class="bridge">
+    <div class="bridge-label">Systems & Intelligence</div>
+    <h2 class="serif">
+        We design the surface.<br>
+        We build the <span class="accent italic">system</span> beneath it.
+    </h2>
+    <p>
+        Behind every material we deliver is a workflow that makes the next one faster. For sponsors, landlords, and multi-location operators ready to scale past the spreadsheet, we build the intelligence layer — automated comp analysis, portfolio dashboards, and the operating systems that turn data into decisions.
+    </p>
+    <p>
+        Start with a project. Discover what a system could do.
+    </p>
+</section>
+
+<!-- INTELLIGENCE TEASER -->
+<section class="intel" id="intelligence">
+    <div class="intel-header">
+        <div>
+            <div class="section-label">Intelligence</div>
+            <h2 class="serif">Beyond the brochure: <span class="accent italic">operating systems</span> for complex operators.</h2>
+        </div>
+    </div>
+    <div class="intel-grid">
+        <div class="intel-card">
+            <h4 class="serif">Portfolio Market Reports</h4>
+            <p>Automated sales and lease comp monitoring across your portfolio. Alerts on market movements, tenant demand shifts, and competitive pricing — delivered as intelligence, not a quarterly scramble.</p>
+            <div class="intel-metric">20 hours → 90 minutes per report</div>
+        </div>
+        <div class="intel-card">
+            <h4 class="serif">Lease Abstraction Workflow</h4>
+            <p>NLP-powered extraction and approval workflow that turns 200+ hours of annual manual lease review into a system that works while your analysts sleep.</p>
+            <div class="intel-metric">15 hrs/wk → 2 hrs/wk of analyst time</div>
+        </div>
+        <div class="intel-card">
+            <h4 class="serif">CRE Workflow Audit</h4>
+            <p>A 90-day diagnostic and build of your AI operating system. We map the opportunity, implement the first systems, and hand you a roadmap for the rest.</p>
+            <div class="intel-metric">$15,000 – $50,000+ · Monthly retainers available</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-final" id="contact">
+    <h2 class="serif">
+        Start with a <span class="accent italic">project</span>.<br>
+        Scale to a <span class="accent italic">system</span>.
+    </h2>
+    <p class="cta-sub">Two ways to begin. Pick the path that fits where you are.</p>
+    <div class="cta-paths">
+        <div class="path-card">
+            <h4>Have a deal or brand that needs materials?</h4>
+            <p>Start with an AI-enhanced OM, BOV, leasing brochure, or brand system. Human-quality design backed by automated market intelligence. 5–10 day turnaround.</p>
+            <a href="mailto:hello@cgai.co?subject=Project%20Inquiry" class="btn btn-primary">
+                Start a project <span class="arrow">→</span>
+            </a>
+            <div class="tags">
+                <span class="tag">OM</span>
+                <span class="tag">BOV</span>
+                <span class="tag">Brochure</span>
+                <span class="tag">Brand</span>
+                <span class="tag">Web</span>
+            </div>
+        </div>
+        <div class="path-card">
+            <h4>Ready to modernize your operation?</h4>
+            <p>Book a 2-week Workflow Audit. We map your AI opportunity, build a 90-day implementation roadmap, and identify the first quick wins across your portfolio or locations.</p>
+            <a href="mailto:hello@cgai.co?subject=Diagnostic%20Booking" class="btn btn-secondary">
+                Book a diagnostic <span class="arrow">→</span>
+            </a>
+            <div class="tags">
+                <span class="tag">90-Day Audit</span>
+                <span class="tag">Implementation</span>
+                <span class="tag">Retainer</span>
+                <span class="tag">Portfolio OS</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>cgai · Los Angeles, CA · <a href="mailto:hello@cgai.co">hello@cgai.co</a></p>
+    <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+        Deal materials, brand systems, and intelligence for operators of physical assets.<br>
+        Not a software vendor. Not a design shop. An advisory practice that ships working systems.
+    </p>
+</footer>
+
+</body>
+</html>
